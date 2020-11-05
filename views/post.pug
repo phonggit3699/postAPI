@@ -1,0 +1,20 @@
+html
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        title New Post
+
+    body
+        h1 Create New Post
+        form(class= 'todo', method='POST', action='http://localhost:3000/post')
+            label(for="title") Title:
+            input(name='title', type='text')
+            label(for="img") Image:
+            input(name='img', type='text')
+            label(for="des") Des:
+            input(name='des', type='text')
+            label(for="post") Post:
+            input(name='post', type='text')
+            label(for="author") Author:
+            input(name='author', type='text')
+            button(type='submit') Submit
