@@ -24,13 +24,7 @@ const postRoute = require('./routes/post.route');
 app.use('/post', postRoute);
 
 app.get('/', async (req, res) => {
-    try{
-        const posts = await postModel.find();
-        res.json(posts);
-    }
-    catch (err){
-        res.json({error: err});
-    }
+   res.send("Hello this is post API");
 });
 
 
