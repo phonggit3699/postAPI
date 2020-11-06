@@ -5,7 +5,7 @@ const pug = require('pug');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 //Listening port
-const port = 3001 || 8080;
+const port = 3000;
 app.set('view engine', 'pug');
 app.set('views', './views');
 //Use middleware
