@@ -30,6 +30,6 @@ app.get('/', async (req, res) => {
 
 
 //Setup server 
-app.listen(port, () => {
-    console.log(`server is flying on port ${port}`);
+app.listen(3000, () => {
+    console.log(`server is flying on port 3000`);
 });
