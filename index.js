@@ -23,8 +23,14 @@ const postRoute = require('./routes/post.route');
 //Use middleware
 app.use('/post', postRoute);
 
-app.get('/', (req, res) => {
-    res.send('Hello Phong');
+app.get('/', async (req, res) => {
+    try{
+        const posts = await postModel.find();
+        res.json(posts);
+    }
+    catch (err){
+        res.json({error: err});
+    }
 });
 
 
