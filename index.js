@@ -16,7 +16,7 @@ app.use(express.static('./views/css'));
 app.use(bodyParser.json());
 
 //Db_connection
-dbconnection();
+// dbconnection();
 
 //Import Routers
 const postRoute = require('./routes/post.route'); 
