@@ -3,6 +3,10 @@ const postModel = require('../models/post.model');
 
 const postRouter = express.Router();
 
+
+postRouter.get('/', async (req, res) => {
+    res.send('Hello Worlds')
+});
 postRouter.get('/postAPI', async (req, res) => {
     try{
         const posts = await postModel.find();
@@ -14,7 +18,11 @@ postRouter.get('/postAPI', async (req, res) => {
 });
 
 postRouter.get('/newPost', async (req, res) => {
-   res.render('./post')
+    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+   res.render('./post', {
+       url: fullUrl
+   });
+   res.redirect('./post');
 });
 
 

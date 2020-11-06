@@ -24,7 +24,7 @@ const postRoute = require('./routes/post.route');
 app.use('/post', postRoute);
 
 app.get('/', (req, res) => {
-    res.send('Hello Phong')
+    res.send('Hello Phong');
 });
 
 
