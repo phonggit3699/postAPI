@@ -4,6 +4,8 @@ const dbconnection = require('./DB_Connection');
 const pug = require('pug');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+//Listening port
+const port = 3001 || 8080;
 app.set('view engine', 'pug');
 app.set('views', './views');
 //Use middleware
@@ -12,8 +14,7 @@ app.use(express.json()) ;// for parsing application/json
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./views/css'));
 app.use(bodyParser.json());
-//Listening port
-const port = 3001;
+
 //Db_connection
 dbconnection();
 
