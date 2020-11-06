@@ -1,7 +1,6 @@
 const express = require ('express');
 const app = express();
-require('dotenv/config');
-const mongodb = require ('mongoose');
+const dbconnection = require('./DB_Connection');
 const pug = require('pug');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -15,11 +14,8 @@ app.use(express.static('./views/css'));
 app.use(bodyParser.json());
 //Listening port
 const port = 3001;
-
-
-mongodb.connect(process.env.DB_CONNECTION, {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
-    if(err) {console.log(err) } else {console.log('DB CONNECTION OK')};
-});
+//Db_connection
+dbconnection();
 
 //Import Routers
 const postRoute = require('./routes/post.route'); 

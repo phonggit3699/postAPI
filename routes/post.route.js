@@ -3,12 +3,32 @@ const postModel = require('../models/post.model');
 
 const postRouter = express.Router();
 
-postRouter.get('/', (req, res) => {
-res.send("post");
-    // res.render('./post');
+postRouter.get('/postAPI', async (req, res) => {
+    try{
+        const posts = await postModel.find();
+        res.json(posts);
+    }
+    catch (err){
+        res.json({error: err});
+    }
 });
 
-postRouter.post('/', async (req, res) => {
+postRouter.get('/newPost', async (req, res) => {
+   res.render('./post')
+});
+
+
+postRouter.get('/postAPI/:id', async (req, res) => {
+    try{
+        const posts = await postModel.findById(req.params.id);
+        res.json(posts);
+    }
+    catch (err){
+        res.json({error: err});
+    }
+});
+
+postRouter.post('/newPost', async (req, res) => {
     const post = new postModel({
         title: req.body.title,
 
@@ -18,12 +38,12 @@ postRouter.post('/', async (req, res) => {
 
         post: req.body.post,
 
-        author: "Phong"
+        author: req.body.author
     });
 
     try {
         const savePost = await post.save();
-        res.redirect('/todo/todolist')
+        res.send(req);
     }
     catch (err) {
         console.log(err)
