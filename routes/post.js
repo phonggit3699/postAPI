@@ -1,42 +1,27 @@
 const express = require('express');
-const postModel = require('../models/post.model');
+const postModel = require('../models/post');
 
 const postRouter = express.Router();
 
-
-postRouter.get('/', async (req, res) => {
-    res.send('Hello Worlds')
-});
-postRouter.get('/postAPI', async (req, res) => {
-    try{
+postRouter.get('/post', async (req, res) => {
+    try {
         const posts = await postModel.find();
         res.json(posts);
     }
-    catch (err){
-        res.json({error: err});
+    catch (err) {
+        res.json({ error: err });
     }
 });
 
 postRouter.get('/newPost', async (req, res) => {
     const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-   res.render('./post', {
-       url: fullUrl
-   });
-   res.redirect('./post');
-});
-
-
-postRouter.get('/postAPI/:id', async (req, res) => {
-    try{
-        const posts = await postModel.findById(req.params.id);
-        res.json(posts);
-    }
-    catch (err){
-        res.json({error: err});
-    }
+    res.render('./post', {
+        url: fullUrl
+    });  
 });
 
 postRouter.post('/newPost', async (req, res) => {
+
     const post = new postModel({
         title: req.body.title,
 
@@ -51,12 +36,25 @@ postRouter.post('/newPost', async (req, res) => {
 
     try {
         const savePost = await post.save();
-        res.send(req);
+        res.json({ status: "sucess"});
     }
     catch (err) {
-        console.log(err)
+        res.json({error: err.message});
     }
-
+    
 });
+
+
+
+postRouter.get('/post/:id', async (req, res) => {
+    try {
+        const posts = await postModel.findById(req.params.id);
+        res.json(posts);
+    }
+    catch (err) {
+        res.json({ error: err });
+    }
+});
+
 
 module.exports = postRouter;
