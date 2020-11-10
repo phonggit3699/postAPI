@@ -3,16 +3,18 @@ const authModel = require('../models/auth');
 const authRouter = express.Router();
 const {authValidation} = require('../middlewares/validation');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-authRouter.get('/auth', async (req, res) => {
-    try {
-        const auths = await authModel.find();
-        res.json(auths);
-    }
-    catch (err) {
-        res.json({ error: err });
-    }
-});
+
+// authRouter.get('/auth', async (req, res) => {
+//     try {
+//         const auths = await authModel.find();
+//         res.json(auths);
+//     }
+//     catch (err) {
+//         res.json({ error: err });
+//     }
+// });
 
 authRouter.get('/newAuth', async (req, res) => {
     const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
@@ -21,6 +23,7 @@ authRouter.get('/newAuth', async (req, res) => {
     });  
 });
 
+//Sign up ------------------------------------------------------------------------------
 authRouter.post('/newAuth', async (req, res) => {
     //Validation-------------------------------------------------
     const {error, value} = await authValidation(req.body);
@@ -57,9 +60,10 @@ authRouter.post('/newAuth', async (req, res) => {
     
 });
 
+//Login---------------------------------------------
 authRouter.post('/findAuth', async (req, res) => {
     //Validation-------------------------------------------------
-    const {error, value} = await authValidation(req.body);
+    const {error} = await authValidation(req.body);
 
     if(error){
         res.json({ status: error.details[0].message});
@@ -75,26 +79,17 @@ authRouter.post('/findAuth', async (req, res) => {
 
     //Check password----------------------------------
     const validPass = await bcrypt.compare(req.body.password, user.password);
+    //Send Token
+    const token = jwt.sign({tokenID: user._id}, process.env.TOKEN_S);
+    res.cookie("userID", user.username);
 
     if(!validPass){
         res.json({ status: "Wrong password"});
         return
     }
-    res.json({ status: "sucess"});
+    res.json({ status: "sucess", username: user.username});
 
   
-});
-
-
-
-authRouter.get('/auth/:id', async (req, res) => {
-    try {
-        const auths = await authModel.findById(req.params.id);
-        res.json(auths);
-    }
-    catch (err) {
-        res.json({ error: err });
-    }
 });
 
 

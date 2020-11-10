@@ -1,6 +1,6 @@
 const express = require('express');
 const postModel = require('../models/post');
-
+const verifyToken = require('../middlewares/verifyToken');
 const postRouter = express.Router();
 
 postRouter.get('/post', async (req, res) => {

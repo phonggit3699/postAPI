@@ -7,7 +7,7 @@ const authValidation =  (data) => {
         password: Joi.string().min(6).required()
     })
 
-    return validationSchema.validate(data);
+    return validationSchema.validate(data, {allowUnknown:true});
 
 };
 

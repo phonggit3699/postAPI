@@ -5,6 +5,7 @@ const pug = require('pug');
 const bodyParser = require('body-parser');
 const middleware = require('./middlewares/middlewares')
 const cors = require('cors');
+
 //app set--------------------------
 app.set('view engine', 'pug');
 app.set('views', './views');
