@@ -5,11 +5,13 @@ const pug = require('pug');
 const bodyParser = require('body-parser');
 const middleware = require('./middlewares/middlewares')
 const cors = require('cors');
+const cookieParser = require('cookie-parser')
 
 //app set--------------------------
 app.set('view engine', 'pug');
 app.set('views', './views');
 //Use middleware---------------------------
+app.use(cookieParser());
 app.use(cors());
 app.use(express.json()) ;// for parsing application/json
 app.use(express.urlencoded({ extended: true }));

@@ -1,6 +1,6 @@
 const express = require('express');
 const postModel = require('../models/post');
-const verifyToken = require('../middlewares/verifyToken');
+const {verifyToken} = require('../middlewares/verifyToken');
 const postRouter = express.Router();
 
 postRouter.get('/post', async (req, res) => {
@@ -13,14 +13,14 @@ postRouter.get('/post', async (req, res) => {
     }
 });
 
-postRouter.get('/newPost', async (req, res) => {
+postRouter.get('/newPost',verifyToken, async (req, res) => {
     const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     res.render('./post', {
         url: fullUrl
     });  
 });
 
-postRouter.post('/newPost', async (req, res) => {
+postRouter.post('/newPost',verifyToken ,async (req, res) => {
 
     const post = new postModel({
         title: req.body.title,

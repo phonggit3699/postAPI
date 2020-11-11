@@ -4,6 +4,7 @@ const authRouter = express.Router();
 const {authValidation} = require('../middlewares/validation');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const {verifyTokenCookie} = require('../middlewares/verifyToken');
 
 
 // authRouter.get('/auth', async (req, res) => {
@@ -61,7 +62,8 @@ authRouter.post('/newAuth', async (req, res) => {
 });
 
 //Login---------------------------------------------
-authRouter.post('/findAuth', async (req, res) => {
+authRouter.post('/findAuth', verifyTokenCookie, async (req, res) => {
+
     //Validation-------------------------------------------------
     const {error} = await authValidation(req.body);
 
@@ -79,15 +81,17 @@ authRouter.post('/findAuth', async (req, res) => {
 
     //Check password----------------------------------
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    //Send Token
-    const token = jwt.sign({tokenID: user._id}, process.env.TOKEN_S);
-    res.cookie("userID", user.username);
-
     if(!validPass){
         res.json({ status: "Wrong password"});
         return
     }
-    res.json({ status: "sucess", username: user.username});
+    //Send Token
+    const token = jwt.sign({tokenID: user._id}, process.env.TOKEN_S);
+    res.json({ status: "sucess", username: user.username, cookie: token});
+
+   
+    
+    
 
   
 });
