@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./views/css'));
 app.use(bodyParser.json());
 //Listening port-------------------------------------
-const port = 3001;
+const port = process.env.PORT || 5000;
 //Db_connection---
 dbconnection();
 
