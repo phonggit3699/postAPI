@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "Phong",
   "license": "ISC",
@@ -22,7 +22,6 @@
     "pug": "^3.0.0"
   },
   "engines": {
-    "node": "12.16.0",
-    "npm": "6.13.4"
+    "node": "12.16.0"
   }
 }
