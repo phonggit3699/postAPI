@@ -3,6 +3,8 @@ html
         meta(charset='UTF-8')
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
         title New Post
+        style
+            include post.css
 
     body
         h1 Create New Post 
@@ -14,7 +16,7 @@ html
             label(for="des") Des:
             textarea(name="des", cols="50", rows="10" type='text')
             label(for="post") Post:
-            textarea(name="post", cols="50", rows="10" type='text')
+            textarea(name="post", cols="50", rows="20" type='text')
             label(for="author") Author:
             input(name='author', type='text')
-            button(type='submit') Submit
+            button(type="submit") Submit

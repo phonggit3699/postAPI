@@ -1,0 +1,16 @@
+html
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        title New Post
+        style
+            include post.css
+
+    body
+        h1 Create New Auth 
+        form(class= 'todo', method='POST', action=url)
+            label(for="username") Username:
+            input(name='username', type='text')
+            label(for="password") Password:
+            input(name='password', type='password')
+            button(type="submit") Submit
