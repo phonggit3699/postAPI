@@ -13,6 +13,31 @@ postRouter.get('/post', async (req, res) => {
     }
 });
 
+postRouter.get('/countPost', async (req, res) => {
+    try {
+        const countPost =  await postModel.countDocuments();
+        res.json(countPost);
+    }
+    catch (err) {
+        res.json({ error: err });
+    }
+});
+
+postRouter.post('/post', async (req, res) => {
+    const offset = parseInt(req.body.skip);
+    const limitPost = parseInt(req.body.limit);
+    try {
+        const posts = await postModel.find().limit(limitPost).skip(offset);
+        
+        res.json(posts);
+       
+    }
+    catch (err) {
+        res.json({ error: err });
+    }
+});
+
+
 postRouter.get('/newPost',verifyToken, async (req, res) => {
     const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     res.render('./post', {
