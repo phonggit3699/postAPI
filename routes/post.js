@@ -1,5 +1,5 @@
 const express = require('express');
-const postModel = require('../models/post');
+const postModel = require('../models/postv2');
 const {verifyToken} = require('../middlewares/verifyToken');
 const postRouter = express.Router();
 
@@ -27,9 +27,9 @@ postRouter.post('/post', async (req, res) => {
     const offset = parseInt(req.body.skip);
     const limitPost = parseInt(req.body.limit);
     try {
-        const posts = await postModel.find().limit(limitPost).skip(offset);
+        const posts = await postModel.find().limit(limitPost).skip(offset).sort({Date: -1});
         
-        res.json(posts);
+        res.status(200).json(posts);
        
     }
     catch (err) {
@@ -48,13 +48,28 @@ postRouter.get('/newPost',verifyToken, async (req, res) => {
 postRouter.post('/newPost',verifyToken ,async (req, res) => {
 
     const post = new postModel({
+
         title: req.body.title,
 
         img: req.body.img,
 
         des: req.body.des,
 
-        post: req.body.post,
+        heading1: req.body.heading1,
+
+        paragraph1: req.body.paragraph1,
+
+        img2: req.body.img2,
+
+        heading2: req.body.heading2,
+
+        paragraph2: req.body.paragraph2,
+
+        img3: req.body.img3,
+
+        heading3: req.body.heading3,
+
+        paragraph3: req.body.paragraph3,
 
         author: req.body.author
     });

@@ -87,13 +87,8 @@ authRouter.post('/findAuth', verifyTokenCookie, async (req, res) => {
     }
     //Send Token
     const token = jwt.sign({tokenID: user._id}, process.env.TOKEN_S);
-    res.json({ status: "sucess", username: user.username, cookie: token});
+    res.cookie('userID',token, { maxAge: 900000, httpOnly: true }).json({ status: "sucess", username: user.username, cookie: token});
 
-   
-    
-    
-
-  
 });
 
 

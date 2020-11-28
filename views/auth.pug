@@ -7,8 +7,8 @@ html
             include post.css
 
     body
-        h1 Create New Auth 
-        form(class= 'todo', method='POST', action=url)
+        h1 Login And Sign up
+        form(class='todo' , method='POST', action='http://localhost:5000/api/findAuth')
             label(for="username") Username:
             input(name='username', type='text')
             label(for="password") Password:

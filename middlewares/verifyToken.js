@@ -4,7 +4,7 @@ function verifyToken(req, res, next) {
     
     const token = req.cookies.userID
     if(!token) {
-        res.status(401).json({status: 'Access Denied'});
+        res.status(401).render('./auth');
         return;
     }
 
