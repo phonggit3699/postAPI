@@ -3,13 +3,15 @@ const postModel = require('../models/postv2');
 const {verifyToken} = require('../middlewares/verifyToken');
 const postRouter = express.Router();
 
-postRouter.get('/post', async (req, res) => {
+postRouter.get('/post/:skip/:limit', async (req, res) => {
+    const offset = parseInt(req.params.skip);
+    const limitPost = parseInt(req.params.limit);
     try {
-        const posts = await postModel.find();
-        res.json(posts);
+        const posts = await postModel.find().limit(limitPost).skip(offset).sort({date: -1});
+        res.status(200).json(posts);
     }
     catch (err) {
-        res.json({ error: err });
+        res.status(404).json({ error: err });
     }
 });
 
@@ -23,19 +25,19 @@ postRouter.get('/countPost', async (req, res) => {
     }
 });
 
-postRouter.post('/post', async (req, res) => {
-    const offset = parseInt(req.body.skip);
-    const limitPost = parseInt(req.body.limit);
-    try {
-        const posts = await postModel.find().limit(limitPost).skip(offset).sort({Date: -1});
+// postRouter.post('/post', async (req, res) => {
+//     const offset = parseInt(req.body.skip);
+//     const limitPost = parseInt(req.body.limit);
+//     try {
+//         const posts = await postModel.find().limit(limitPost).skip(offset).sort({Date: -1});
         
-        res.status(200).json(posts);
+//         res.status(200).json(posts);
        
-    }
-    catch (err) {
-        res.json({ error: err });
-    }
-});
+//     }
+//     catch (err) {
+//         res.json({ error: err });
+//     }
+// });
 
 
 postRouter.get('/newPost',verifyToken, async (req, res) => {
