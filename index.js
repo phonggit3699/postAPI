@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const middleware = require('./middlewares/middlewares')
 const cors = require('cors');
 const cookieParser = require('cookie-parser')
+var path = require('path');
 
 //app set--------------------------
 app.set('view engine', 'pug');
@@ -17,6 +18,7 @@ app.use(express.json()) ;// for parsing application/json
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./views/css'));
 app.use(bodyParser.json());
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 //Listening port-------------------------------------
 const port = process.env.PORT || 5000;
 //Db_connection---

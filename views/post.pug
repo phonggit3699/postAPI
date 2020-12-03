@@ -1,3 +1,4 @@
+doctype html
 html
     head
         meta(charset='UTF-8')
@@ -5,6 +6,19 @@ html
         title New Post
         style
             include post.css
+        script(src='/tinymce/tinymce.min.js')
+        script.
+            tinymce.init({
+            selector: 'textarea',
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar: 'casechange checklist code format undo redo | styleselect | bold italic | style-p style-h1 style-h2 style-h3 style-pre style-code',
+            toolbar_mode: 'floating'
+            });
+
 
     body
         h1 Create New Post 
@@ -18,7 +32,7 @@ html
             label(for="heading1") Heading1:
             input(name='heading1', type='text')
             label(for="paragraph1") Paragraph1:
-            textarea(name="paragraph1", cols="80", rows="20" type='text')
+            textarea(name="paragraph1", cols="80", rows="20" type='text', id="mytextarea")
             label(for="img2") Image2 (Link):
             input(name='img2', type='text')
             label(for="heading2") Heading2:
