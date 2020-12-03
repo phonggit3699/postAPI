@@ -62,6 +62,10 @@ postRouter.get('/newPost',verifyToken, async (req, res) => {
 
 postRouter.post('/newPost',verifyToken ,async (req, res) => {
 
+    const paragraph1 = req.body.paragraph1.replace(/\n/g, "<br />");
+    const paragraph2 = req.body.paragraph2.replace(/\n/g, "<br />");
+    const paragraph3 = req.body.paragraph3.replace(/\n/g, "<br />");
+
     const post = new postModel({
 
         title: req.body.title,
@@ -72,19 +76,19 @@ postRouter.post('/newPost',verifyToken ,async (req, res) => {
 
         heading1: req.body.heading1,
 
-        paragraph1: req.body.paragraph1,
+        paragraph1: paragraph1,
 
         img2: req.body.img2,
 
         heading2: req.body.heading2,
 
-        paragraph2: req.body.paragraph2,
+        paragraph2: paragraph2,
 
         img3: req.body.img3,
 
         heading3: req.body.heading3,
 
-        paragraph3: req.body.paragraph3,
+        paragraph3: paragraph3,
 
         author: req.body.author
     });
@@ -96,7 +100,6 @@ postRouter.post('/newPost',verifyToken ,async (req, res) => {
     catch (err) {
         res.json({error: err.message});
     }
-    
 });
 
 
