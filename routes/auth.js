@@ -7,15 +7,31 @@ const jwt = require('jsonwebtoken');
 const {verifyTokenCookie} = require('../middlewares/verifyToken');
 
 
-// authRouter.get('/auth', async (req, res) => {
-//     try {
-//         const auths = await authModel.find();
-//         res.json(auths);
-//     }
-//     catch (err) {
-//         res.json({ error: err });
-//     }
-// });
+authRouter.post('/login', async (req, res) => {
+    const {error} = await authValidation(req.body);
+
+    if(error){
+        res.json({ status: error.details[0].message});
+        return;
+    }
+    //Check username exist ------------------------------------------------------------
+    const user = await authModel.findOne({ username: req.body.username});
+
+    if(!user){
+        res.json({ status: "username doesn't exsits"});
+        return
+    }
+
+    //Check password----------------------------------
+    const validPass = await bcrypt.compare(req.body.password, user.password);
+    if(!validPass){
+        res.json({ status: "Wrong password"});
+        return
+    }
+    //Send Token
+    const token = jwt.sign({tokenID: user._id}, process.env.TOKEN_S);
+    res.cookie('userID',token, { maxAge: 1900000, httpOnly: true }).redirect('/');
+});
 
 authRouter.get('/newAuth', async (req, res) => {
     const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;

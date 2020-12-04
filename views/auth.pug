@@ -2,13 +2,13 @@ html
     head
         meta(charset='UTF-8')
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
-        title New Post
+        title Only Login
         style
             include post.css
 
     body
-        h1 Login And Sign up
-        form(class='todo' , method='POST', action='http://localhost:5000/api/findAuth')
+        h1 Only Login
+        form(class='todo' , method='POST', action=url+'/api/login')
             label(for="username") Username:
             input(name='username', type='text')
             label(for="password") Password:

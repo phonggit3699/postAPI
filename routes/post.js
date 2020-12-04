@@ -15,7 +15,6 @@ postRouter.get('/post', async (req, res) => {
     }
 });
 
-
 postRouter.get('/post/:skip/:limit', async (req, res) => {
     const offset = parseInt(req.params.skip);
     const limitPost = parseInt(req.params.limit);
@@ -62,6 +61,7 @@ postRouter.get('/newPost',verifyToken, async (req, res) => {
 
 postRouter.post('/newPost',verifyToken ,async (req, res) => {
 
+    const des = req.body.des.replace(/\n/g, "<br/>");
     const paragraph1 = req.body.paragraph1.replace(/\n/g, "<br/>");
     const paragraph2 = req.body.paragraph2.replace(/\n/g, "<br/>");
     const paragraph3 = req.body.paragraph3.replace(/\n/g, "<br/>");
@@ -71,7 +71,7 @@ postRouter.post('/newPost',verifyToken ,async (req, res) => {
 
         img: req.body.img,
 
-        des: req.body.des,
+        des: des,
 
         heading1: req.body.heading1,
 

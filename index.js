@@ -1,4 +1,4 @@
-const express = require ('express');
+const express = require('express');
 const app = express();
 const dbconnection = require('./DB_Connection');
 const pug = require('pug');
@@ -14,7 +14,7 @@ app.set('views', './views');
 //Use middleware---------------------------
 app.use(cookieParser());
 app.use(cors());
-app.use(express.json()) ;// for parsing application/json
+app.use(express.json());// for parsing application/json
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./views/css'));
 app.use(bodyParser.json());
@@ -25,17 +25,27 @@ const port = process.env.PORT || 5000;
 dbconnection();
 
 //Import Routers--------------------------
-const postRoute = require('./routes/post'); 
-const authRoute = require('./routes/auth'); 
+const postRoute = require('./routes/post');
+const authRoute = require('./routes/auth');
 
 
 
 app.get('/', async (req, res) => {
-   res.send("Hello this is phongblog... API");
+    const fullUrl = req.protocol + '://' + req.get('host')
+    if (!req.cookies.userID) {
+
+        res.render('./auth', {
+            url: fullUrl
+        })
+    } else {
+        res.render('./home',{
+            url: fullUrl
+        })
+    }
 });
 
 app.get('/api', async (req, res) => {
-    res.json({message: 'Hello 🌏🌎🌍'})
+    res.json({ message: 'Hello 🌏🌎🌍' })
 });
 
 

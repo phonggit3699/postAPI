@@ -1,0 +1,23 @@
+div ul {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+div ul li {
+    list-style: none;
+}
+
+div ul li a{
+    background-color: rgb(29, 180, 214);
+    border-radius: 5px;
+    margin-top: 1rem;
+    text-decoration: none;
+    padding: 1rem;
+    color: black;
+}
+
+div ul li a:hover{
+    
+    color: white;
+}
