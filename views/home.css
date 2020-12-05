@@ -1,3 +1,12 @@
+body a{
+    background-color: red;
+    border-radius: 5px;
+    margin-top: 1rem;
+    text-decoration: none;
+    padding: 1rem;
+    color: white;
+}
+
 div ul {
     display: flex;
     justify-content: space-evenly;

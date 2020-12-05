@@ -3,6 +3,7 @@ html
     head
         meta(charset='UTF-8')
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        link(rel='icon', href='../favicon.ico')
         title New Post
         style
             include post.css
@@ -29,22 +30,10 @@ html
             input(name='img', type='text')
             label(for="des") Des:
             textarea(name="des", cols="50", rows="10" type='text')
-            label(for="heading1") Heading1:
-            input(name='heading1', type='text')
-            label(for="paragraph1") Paragraph1:
-            textarea(name="paragraph1", cols="80", rows="20" type='text', id="styleTextarea")
-            label(for="img2") Image2 (Link):
-            input(name='img2', type='text')
-            label(for="heading2") Heading2:
-            input(name='heading2', type='text')
-            label(for="paragraph2") Paragraph2:
-            textarea(name="paragraph2", cols="80", rows="20" type='text', id="styleTextarea")
-            label(for="img3") Image3 (Link):
-            input(name='img3', type='text')
-            label(for="heading3") Heading3:
-            input(name='heading3', type='text')
-            label(for="paragraph3") Paragraph3:
-            textarea(name="paragraph3", cols="80", rows="20" type='text',id="styleTextarea") 
+            label(for="post") Post:
+            textarea(name="post", cols="80", rows="20" type='text',id="styleTextarea") 
             label(for="author") Author:
             input(name='author', type='text')
+            label(for="category") Category:
+            input(name='category', type='text', id='category')
             button(type="submit") Submit

@@ -8,6 +8,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser')
 var path = require('path');
 
+
 //app set--------------------------
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -30,7 +31,7 @@ const authRoute = require('./routes/auth');
 
 
 
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
     const fullUrl = req.protocol + '://' + req.get('host')
     if (!req.cookies.userID) {
 

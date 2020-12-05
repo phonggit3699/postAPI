@@ -24,7 +24,12 @@ const postSchema = mongodb.Schema({
         require: "Internet"
     },
 
-    Date: {
+    category: {
+        type: String,
+        require: true
+    },
+
+    date: {
         type: Date,
         default: Date.now
     }

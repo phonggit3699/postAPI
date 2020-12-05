@@ -33,6 +33,10 @@ authRouter.post('/login', async (req, res) => {
     res.cookie('userID',token, { maxAge: 1900000, httpOnly: true }).redirect('/');
 });
 
+authRouter.get('/logout', async (req, res) => {
+    res.clearCookie('userID').redirect('/');
+});
+
 authRouter.get('/newAuth', async (req, res) => {
     const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     res.render('./auth', {
