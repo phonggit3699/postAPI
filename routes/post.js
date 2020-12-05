@@ -37,7 +37,7 @@ postRouter.get('/category/:tag', async (req, res) => {
 
     //get category from url
     const category = req.params.tag;
-    console.log('hello')
+    
     try {
         //using mongooes to get post
         const posts = await postModel.find({ category: category }).limit(6).skip(0);
@@ -69,8 +69,8 @@ postRouter.get('/newPost', verifyToken, async (req, res) => {
 
 postRouter.post('/newPost', verifyToken, async (req, res) => {
 
-    const des = req.body.des.replace(/\n/g, "<br/>");
-    const postContent= req.body.post.replace(/\n/g, "<br/>");
+    // const des = req.body.des.replace(/\n/g, "<br/>");
+    // const postContent= req.body.post.replace(/\n/g, "<br/>");
 
     const post = new postModel({
 
@@ -78,9 +78,9 @@ postRouter.post('/newPost', verifyToken, async (req, res) => {
 
         img: req.body.img,
 
-        des: des,
+        des: req.body.des,
 
-        post: postContent,
+        post: req.body.post,
         
         author: req.body.author,
         
